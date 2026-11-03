@@ -22,4 +22,5 @@ public enum EConfigType
     // PattN: fork-only type. Its value stays clear of the values upstream v2rayN assigns, so that a type added
     // upstream later cannot collide with it on merge (as PattNG's AETHER(500)).
     Aether = 500,
+    Tor = 501,
 }

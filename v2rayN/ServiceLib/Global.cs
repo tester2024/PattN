@@ -264,6 +264,7 @@ public class Global
         // PattN: the links of Aether profiles, the scheme PattNG's are written with, so that the two apps read each
         // other's links
         { EConfigType.Aether, "aether://" },
+        { EConfigType.Tor, "tor://" },
     };
 
     public static readonly Dictionary<EConfigType, string> ProtocolTypes = new()
@@ -285,6 +286,7 @@ public class Global
         // runs needs its name here: a proxy domain strategy of the DNS settings maps them all through this table, and a
         // missing one would leave the configuration of every profile without its DNS servers.
         { EConfigType.Aether, "socks" },
+        { EConfigType.Tor, "socks" },
     };
 
     public static readonly List<string> VmessSecurities =
@@ -400,6 +402,7 @@ public class Global
 
         // PattN: Xray alone runs an Aether profile, as a SOCKS outbound to its core (V2rayAetherService.cs)
         EConfigType.Aether,
+        EConfigType.Tor,
     ];
 
     public static readonly HashSet<EConfigType> SingboxSupportConfigType =

@@ -9,6 +9,12 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial int LocalPort { get; set; }
     // PattN: the Aether listen port as written, so that a value that is no port is refused on save instead of being lost
     [Reactive] public partial string AetherListenPort { get; set; }
+    [Reactive] public partial string TorListenPort { get; set; }
+    [Reactive] public partial bool TorSnowflake { get; set; }
+    [Reactive] public partial bool TorLyrebird { get; set; }
+    [Reactive] public partial bool TorConjure { get; set; }
+    [Reactive] public partial bool TorAutoFetch { get; set; }
+    [Reactive] public partial string TorCustomBridges { get; set; }
     [Reactive] public partial bool SecondLocalPortEnabled { get; set; }
     [Reactive] public partial bool UdpEnabled { get; set; }
     [Reactive] public partial bool SniffingEnabled { get; set; }
@@ -160,6 +166,13 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         BindInterface = _config.CoreBasicItem.BindInterface ?? string.Empty;
         // PattN: the port the cores use, the default one for a stored value that is no such port
         AetherListenPort = AetherPorts.ListenPortOf(_config.CoreBasicItem.AetherListenPort).ToString();
+        _config.TorItem ??= new();
+        TorListenPort = TorPorts.ListenPortOf(_config.TorItem.ListenPort).ToString();
+        TorSnowflake = _config.TorItem.Snowflake ?? true;
+        TorLyrebird = _config.TorItem.Lyrebird ?? true;
+        TorConjure = _config.TorItem.Conjure ?? true;
+        TorAutoFetch = _config.TorItem.AutoFetch ?? true;
+        TorCustomBridges = _config.TorItem.CustomBridges ?? string.Empty;
         Mux4RayConcurrency = _config.Mux4RayItem.Concurrency;
         Mux4RayXudpConcurrency = _config.Mux4RayItem.XudpConcurrency;
         Mux4RayXudpProxyUDP443 = _config.Mux4RayItem.XudpProxyUDP443 ?? string.Empty;
@@ -354,6 +367,13 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         _config.CoreBasicItem.BindInterface = BindInterface.TrimEx();
         // PattN: checked above, so this is the port written
         _config.CoreBasicItem.AetherListenPort = StoredAetherListenPort(AetherListenPort);
+        _config.TorItem ??= new();
+        _config.TorItem.ListenPort = TorPorts.ListenPortOf(TorListenPort);
+        _config.TorItem.Snowflake = TorSnowflake;
+        _config.TorItem.Lyrebird = TorLyrebird;
+        _config.TorItem.Conjure = TorConjure;
+        _config.TorItem.AutoFetch = TorAutoFetch;
+        _config.TorItem.CustomBridges = TorCustomBridges;
         _config.Mux4RayItem.Concurrency = Mux4RayConcurrency > 0 ? Mux4RayConcurrency : null;
         _config.Mux4RayItem.XudpConcurrency = Mux4RayXudpConcurrency > 0 ? Mux4RayXudpConcurrency : null;
         _config.Mux4RayItem.XudpProxyUDP443 = Mux4RayXudpProxyUDP443.NullIfEmpty();

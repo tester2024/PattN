@@ -22,6 +22,7 @@ public class FmtHandler
                 EConfigType.Naive => NaiveFmt.ToUri(item),
                 // PattN: the fork's Aether profiles, as PattNG shares them
                 EConfigType.Aether => AetherFmt.ToUri(item),
+                EConfigType.Tor => TorFmt.ToUri(item),
                 _ => null,
             };
 
@@ -101,6 +102,10 @@ public class FmtHandler
             else if (str.StartsWith(Global.ProtocolShares[EConfigType.Aether]))
             {
                 return AetherFmt.Resolve(str, out msg);
+            }
+            else if (str.StartsWith(Global.ProtocolShares[EConfigType.Tor]))
+            {
+                return TorFmt.Resolve(str, out msg);
             }
             else
             {

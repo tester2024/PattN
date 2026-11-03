@@ -92,4 +92,10 @@ public record ProtocolExtraItem
     public string? AetherTorBridgeLines { get; init; }
     public string? AetherTorRelays { get; init; }
     public string? AetherCommand { get; init; }
+
+    public bool? TorSnowflake { get; init; }
+    public bool? TorLyrebird { get; init; }
+    public bool? TorConjure { get; init; }
+    public bool? TorAutoFetch { get; init; }
+    public string? TorCustomBridges { get; init; }
 }

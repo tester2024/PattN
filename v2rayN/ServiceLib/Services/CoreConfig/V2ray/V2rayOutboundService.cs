@@ -222,6 +222,15 @@ public partial class CoreConfigV2rayService
                         FillAetherOutbound(outbound);
                         return;
                     }
+                case EConfigType.Tor:
+                    {
+                        outbound.protocol = Global.ProtocolTypes[EConfigType.Tor];
+                        outbound.settings.address = Global.Loopback;
+                        outbound.settings.port = TorCore.Of(_node, TorPorts.ListenPortOf(_config.TorItem?.ListenPort), TorSettings.From(_config.TorItem)).Port;
+                        FillOutboundMux(outbound);
+                        outbound.streamSettings = null;
+                        return;
+                    }
             }
 
             outbound.protocol = Global.ProtocolTypes[_node.ConfigType];

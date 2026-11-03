@@ -24,6 +24,7 @@ global using ReactiveUI.Primitives.Extensions;
 global using ReactiveUI.Primitives.Signals;
 global using ReactiveUI.SourceGenerators;
 global using ServiceLib.Aether; // PattN: the fork's Aether code
+global using ServiceLib.Tor;
 global using ServiceLib.Base;
 global using ServiceLib.Common;
 global using ServiceLib.Enums;

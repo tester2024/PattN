@@ -79,6 +79,16 @@ jobs:
       run: |
         bash package-aether.sh "$Target-$Arch" "PattN-$Target-$Arch/bin"
 
+    - name: Setup Go for Tor core
+      uses: actions/setup-go@v5
+      with:
+        go-version: "1.26"
+        cache: false
+
+    - name: Bundle Tor core and Conjure client
+      run: |
+        bash package-tor.sh "$Target-$Arch" "PattN-$Target-$Arch/bin"
+
     - name: Bundle Chocolate4U geo files
       run: |
         set -euo pipefail

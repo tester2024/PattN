@@ -38,6 +38,7 @@ public class Config
 
     // PattN: the settings of Aether that belong to no profile
     public AetherItem AetherItem { get; set; }
+    public TorItem TorItem { get; set; } = new();
 
     #endregion other entities
 }

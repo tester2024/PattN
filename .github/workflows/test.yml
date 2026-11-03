@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - my-releases
     paths:
       - 'v2rayN/ServiceLib/**'
       - 'v2rayN/ServiceLib.UdpTest/**'

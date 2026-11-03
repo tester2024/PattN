@@ -49,6 +49,12 @@ public class ProfileItem
                 summary += Address.IsNullOrEmpty() || Port <= 0 ? $"{Remarks}({path})" : $"{Remarks}({path}, {addr}:{Port})";
                 return summary;
             }
+            if (ConfigType == EConfigType.Tor)
+            {
+                var transports = string.Join(" + ", TorCore.Of(this).ActiveTransports);
+                summary += string.IsNullOrEmpty(transports) ? Remarks : $"{Remarks}({transports})";
+                return summary;
+            }
             summary += $"{Remarks}({addr}:{Port})";
         }
         return summary;
@@ -92,7 +98,7 @@ public class ProfileItem
 
         // PattN: an Aether profile needs no endpoint of its own (PattNG LauncherManager): its core finds one, and the
         // outbound built for it points at that core
-        if (ConfigType == EConfigType.Aether)
+        if (ConfigType is EConfigType.Aether or EConfigType.Tor)
         {
             return true;
         }

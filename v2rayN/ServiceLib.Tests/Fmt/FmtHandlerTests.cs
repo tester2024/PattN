@@ -21,6 +21,7 @@ public class FmtHandlerTests
         [EConfigType.Naive] = () => CreateNaiveProfile(false),
         // PattN: the fork's Aether profiles; AetherFmtHandlerTests checks the rest of their links
         [EConfigType.Aether] = CreateAetherProfile,
+        [EConfigType.Tor] = CreateTorProfile,
     };
 
     [Test]
@@ -526,6 +527,27 @@ public class FmtHandlerTests
         };
 
         item.SetProtocolExtra(new ProtocolExtraItem { AetherProtocol = "masque", AetherScanMode = "verified", });
+
+        return item;
+    }
+
+    private static ProfileItem CreateTorProfile()
+    {
+        var item = new ProfileItem
+        {
+            ConfigType = EConfigType.Tor,
+            Remarks = "tor demo",
+            Address = string.Empty,
+            Port = 0,
+        };
+
+        item.SetProtocolExtra(new ProtocolExtraItem
+        {
+            TorSnowflake = true,
+            TorLyrebird = true,
+            TorConjure = true,
+            TorAutoFetch = true,
+        });
 
         return item;
     }
